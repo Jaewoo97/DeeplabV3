@@ -9,7 +9,6 @@ import datahandler
 from model import createDeepLabv3
 from trainer import train_model
 
-
 @click.command()
 @click.option("--data-directory",
               required=True,
@@ -19,11 +18,11 @@ from trainer import train_model
               help="Specify the experiment directory.")
 @click.option(
     "--epochs",
-    default=25,
+    default=100,
     type=int,
     help="Specify the number of epochs you want to run the experiment for.")
 @click.option("--batch-size",
-              default=4,
+              default=1,
               type=int,
               help="Specify the batch size for the dataloader.")
 def main(data_directory, exp_directory, epochs, batch_size):

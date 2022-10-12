@@ -3,7 +3,7 @@ from pathlib import Path
 
 import torch
 from PIL import Image
-from segdataset import SegmentationDataset
+from ..segdataset import SegmentationDataset
 from torch.utils.data import DataLoader
 from torchvision import transforms
 

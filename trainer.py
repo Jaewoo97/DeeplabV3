@@ -6,7 +6,7 @@ import time
 import numpy as np
 import torch
 from tqdm import tqdm
-
+torch.cuda.empty_cache()
 
 def train_model(model, criterion, dataloaders, optimizer, metrics, bpath,
                 num_epochs):
