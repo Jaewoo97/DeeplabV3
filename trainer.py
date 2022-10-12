@@ -12,7 +12,7 @@ def train_model(model, criterion, dataloaders, optimizer, metrics, bpath,
                 num_epochs):
     since = time.time()
     best_model_wts = copy.deepcopy(model.state_dict())
-    best_loss = 1e10
+    best_loss = 1e9
     # Use gpu if available
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     model.to(device)
@@ -82,7 +82,7 @@ def train_model(model, criterion, dataloaders, optimizer, metrics, bpath,
     print('Training complete in {:.0f}m {:.0f}s'.format(
         time_elapsed // 60, time_elapsed % 60))
     print('Lowest Loss: {:4f}'.format(best_loss))
-
+    bestTrainModel = model
     # load best model weights
     model.load_state_dict(best_model_wts)
-    return model
+    return bestTrainModel, model

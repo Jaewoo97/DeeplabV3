@@ -47,7 +47,7 @@ def main(data_directory, exp_directory, epochs, batch_size):
     # Create the dataloader
     dataloaders = datahandler.get_dataloader_single_folder(
         data_directory, batch_size=batch_size)
-    _ = train_model(model,
+    bestTrainModel, bestValModel = train_model(model,
                     criterion,
                     dataloaders,
                     optimizer,
@@ -56,7 +56,8 @@ def main(data_directory, exp_directory, epochs, batch_size):
                     num_epochs=epochs)
 
     # Save the trained model
-    torch.save(model, exp_directory / 'weights.pt')
+    torch.save(bestValModel, exp_directory / 'BestValWeights.pt')
+    torch.save(bestTrainModel, exp_directory / 'BestTrainWeights.pt')
 
 
 if __name__ == "__main__":
