@@ -24,6 +24,7 @@ class normalize():
         return proc_img
 
 def HWC_to_CHW(tensor, sal=False):
+    print(tensor.shape)
     if sal:
         tensor = np.expand_dims(tensor, axis=0)
     else:
@@ -108,8 +109,8 @@ def get_dataloader_single_folder(data_dir: str,
         Train and Test dataloaders.
     """
     tf_list = []
-    tf_list.append(normalize())
     tf_list.append(HWC_to_CHW)
+    tf_list.append(normalize())
     tf_list.append(torch.from_numpy)
     data_transforms = transforms.Compose(tf_list)
 
