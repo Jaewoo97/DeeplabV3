@@ -45,7 +45,8 @@ def get_dataloader_sep_folder(data_dir: str,
         x: SegmentationDataset(root=Path(data_dir) / x,
                                transforms=data_transforms,
                                image_folder=image_folder,
-                               mask_folder=mask_folder)
+                               mask_folder=mask_folder,
+                               coating="all")
         for x in ['Train', 'Test']
     }
     dataloaders = {
@@ -59,9 +60,10 @@ def get_dataloader_sep_folder(data_dir: str,
 
 
 def get_dataloader_single_folder(data_dir: str,
+                                 coating: str,
                                  image_folder: str = 'Images',
                                  mask_folder: str = 'Masks',
-                                 fraction: float = 0.2,
+                                 fraction: float = 0.1,
                                  batch_size: int = 4):
     """Create train and test dataloader from a single directory containing
     the image and mask folders.
@@ -70,7 +72,7 @@ def get_dataloader_single_folder(data_dir: str,
         data_dir (str): Data directory path or root
         image_folder (str, optional): Image folder name. Defaults to 'Images'.
         mask_folder (str, optional): Mask folder name. Defaults to 'Masks'.
-        fraction (float, optional): Fraction of Test set. Defaults to 0.2.
+        fraction (float, optional): Fraction of Test set. Defaults to 0.1.
         batch_size (int, optional): Dataloader batch size. Defaults to 4.
 
     Returns:
@@ -83,6 +85,7 @@ def get_dataloader_single_folder(data_dir: str,
         x: SegmentationDataset(data_dir,
                                image_folder=image_folder,
                                mask_folder=mask_folder,
+                               coating=coating,
                                seed=100,
                                fraction=fraction,
                                subset=x,

@@ -19,6 +19,7 @@ class SegmentationDataset(VisionDataset):
                  root: str,
                  image_folder: str,
                  mask_folder: str,
+                 coating: str,
                  transforms: Optional[Callable] = None,
                  seed: int = None,
                  fraction: float = None,
@@ -33,6 +34,7 @@ class SegmentationDataset(VisionDataset):
             transforms (Optional[Callable], optional): A function/transform that takes in
             a sample and returns a transformed version.
             E.g, ``transforms.ToTensor`` for images. Defaults to None.
+            coating (str): type of coating (hpi, hpo, all) for generating training set
             seed (int, optional): Specify a seed for the train and test split for reproducible results. Defaults to None.
             fraction (float, optional): A float value from 0 to 1 which specifies the validation split fraction. Defaults to None.
             subset (str, optional): 'Train' or 'Test' to select the appropriate set. Defaults to None.
@@ -74,8 +76,14 @@ class SegmentationDataset(VisionDataset):
                     f"{subset} is not a valid input. Acceptable values are Train and Test."
                 ))
             self.fraction = fraction
-            self.image_list = np.array(sorted(image_folder_path.glob("*")))
-            self.mask_list = np.array(sorted(mask_folder_path.glob("*")))
+            temp_imgList = np.array(sorted(image_folder_path.glob("*")))
+            temp_maskList = np.array(sorted(mask_folder_path.glob("*")))
+            if coating == "hpi" or coating == "hpo":
+                self.image_list = [imgdir for imgdir in temp_imgList if coating in imgdir]
+                self.mask_list = [maskdir for maskdir in temp_maskList if coating in maskdir]
+            elif coating == "all":
+                self.image_list = temp_imgList
+                self.mask_list = temp_maskList
             if seed:
                 np.random.seed(seed)
                 indices = np.arange(len(self.image_list))

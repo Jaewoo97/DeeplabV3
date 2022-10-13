@@ -21,11 +21,16 @@ from trainer import train_model
     default=100,
     type=int,
     help="Specify the number of epochs you want to run the experiment for.")
+@click.option(
+    "--trainingSetType",
+    default="all",
+    type=str,
+    help="Training set specification.")
 @click.option("--batch-size",
               default=1,
               type=int,
               help="Specify the batch size for the dataloader.")
-def main(data_directory, exp_directory, epochs, batch_size):
+def main(data_directory, exp_directory, epochs, batch_size, trainingSetType):
     # Create the deeplabv3 resnet101 model which is pretrained on a subset
     # of COCO train2017, on the 20 categories that are present in the Pascal VOC dataset.
     model = createDeepLabv3()
@@ -46,7 +51,7 @@ def main(data_directory, exp_directory, epochs, batch_size):
 
     # Create the dataloader
     dataloaders = datahandler.get_dataloader_single_folder(
-        data_directory, batch_size=batch_size)
+        data_directory, batch_size=batch_size, coating=trainingSetType)
     bestTrainModel, bestValModel = train_model(model,
                     criterion,
                     dataloaders,

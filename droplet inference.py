@@ -5,12 +5,12 @@ import pandas as pd
 import glob
 import numpy as np
 
+trainImgs = glob.glob('Droplets/Test/hydrophobic/*.png')
+hpiTest = glob.glob('Droplets/Test/hydrophilic/*.png')
+hpoTest = glob.glob('Droplets/Test/hydrophobic/*.png')
+
 model = torch.load('./CFExp/BestValWeights.pt')
 model.eval()
-
-trainImgs = glob.glob('Droplets/TestImages/hydrophobic/*.png')
-hpiTest = glob.glob('Droplets/TestImages/hydrophobic/*.png')
-hpoTest = glob.glob('Droplets/TestImages/hydrophobic/*.png')
 
 test0 = cv.imread(hpiTest[0])
 test = cv.cvtColor(test0, cv.COLOR_BGR2RGB).transpose(2, 0, 1).reshape(1, 3, 500, 500)
