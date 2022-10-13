@@ -13,7 +13,7 @@ def createDeepLabv3(outputchannels=1):
     Returns:
         model: Returns the DeepLabv3 model with the ResNet101 backbone.
     """
-    model = models.segmentation.deeplabv3_resnet50(pretrained=True,
+    model = models.segmentation.deeplabv3_resnet50(weights='COCO_WITH_VOC_LABELS_V1',
                                                     progress=True)
     model.classifier = DeepLabHead(2048, outputchannels)
     # Set the model in training mode
