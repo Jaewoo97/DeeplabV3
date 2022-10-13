@@ -18,7 +18,7 @@ from trainer import train_model
               help="Specify the experiment directory.")
 @click.option(
     "--epochs",
-    default=100,
+    default=25,
     type=int,
     help="Specify the number of epochs you want to run the experiment for.")
 @click.option(
@@ -27,7 +27,7 @@ from trainer import train_model
     type=str,
     help="Training set specification.")
 @click.option("--batch-size",
-              default=1,
+              default=4,
               type=int,
               help="Specify the batch size for the dataloader.")
 def main(data_directory, exp_directory, epochs, batch_size, trainingSetType):
