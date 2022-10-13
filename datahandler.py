@@ -107,7 +107,11 @@ def get_dataloader_single_folder(data_dir: str,
         dataloaders: Returns dataloaders dictionary containing the
         Train and Test dataloaders.
     """
-    data_transforms = transforms.Compose([transforms.ToTensor()])
+    tf_list = []
+    tf_list.append(normalize())
+    tf_list.append(HWC_to_CHW)
+    tf_list.append(torch.from_numpy)
+    data_transforms = transforms.Compose(tf_list)
 
     image_datasets = {
         x: SegmentationDataset(data_dir,
