@@ -14,6 +14,7 @@ model.eval()
 
 test0 = cv.imread(hpiTest[0])
 test = cv.cvtColor(test0, cv.COLOR_BGR2RGB).transpose(2, 0, 1).reshape(1, 3, 500, 500)
+foo = test.transpose(2,0,1)
 with torch.no_grad():
     pred = model(torch.from_numpy(test).type(torch.cuda.FloatTensor)/255)
 
