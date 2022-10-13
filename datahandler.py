@@ -64,8 +64,8 @@ def get_dataloader_sep_folder(data_dir: str,
         Train and Test dataloaders.
     """
     tf_list = []
-    tf_list.append(normalize())
     tf_list.append(HWC_to_CHW)
+    tf_list.append(normalize())
     tf_list.append(torch.from_numpy)
     data_transforms = transforms.Compose(tf_list)
 
