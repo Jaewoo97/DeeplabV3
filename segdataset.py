@@ -76,14 +76,14 @@ class SegmentationDataset(VisionDataset):
                     f"{subset} is not a valid input. Acceptable values are Train and Test."
                 ))
             self.fraction = fraction
-            temp_imgList = np.array(sorted(image_folder_path.glob("*")))
-            temp_maskList = np.array(sorted(mask_folder_path.glob("*")))
-            if coating == "hpi" or coating == "hpo":
-                self.image_list = np.array([imgdir for imgdir in temp_imgList if coating in imgdir])
-                self.mask_list = np.array([maskdir for maskdir in temp_maskList if coating in maskdir])
-            elif coating == "all":
-                self.image_list = temp_imgList
-                self.mask_list = temp_maskList
+            if coating == "all":
+                globstring = '*'
+            elif coating == 'hpo':
+                globstring = 'HPo*'
+            elif coating == 'hpi':
+                globstring = 'HPi*'
+            self.image_list = np.array(sorted(image_folder_path.glob(globstring)))
+            self.mask_list = np.array(sorted(mask_folder_path.glob(globstring)))
             if seed:
                 np.random.seed(seed)
                 indices = np.arange(len(self.image_list))
