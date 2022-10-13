@@ -79,8 +79,8 @@ class SegmentationDataset(VisionDataset):
             temp_imgList = np.array(sorted(image_folder_path.glob("*")))
             temp_maskList = np.array(sorted(mask_folder_path.glob("*")))
             if coating == "hpi" or coating == "hpo":
-                self.image_list = [imgdir for imgdir in temp_imgList if coating in imgdir]
-                self.mask_list = [maskdir for maskdir in temp_maskList if coating in maskdir]
+                self.image_list = np.array([imgdir for imgdir in temp_imgList if coating in imgdir])
+                self.mask_list = np.array([maskdir for maskdir in temp_maskList if coating in maskdir])
             elif coating == "all":
                 self.image_list = temp_imgList
                 self.mask_list = temp_maskList

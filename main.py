@@ -25,7 +25,7 @@ from trainer import train_model
     "--trainingSetType",
     default="all",
     type=str,
-    help="Training set specification.")
+    help="Training set specification. (hpo, hpi, all)")
 @click.option("--batch-size",
               default=4,
               type=int,
