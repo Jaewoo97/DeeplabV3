@@ -24,7 +24,7 @@ class normalize():
         return proc_img
 
 def HWC_to_CHW(tensor, sal=False):
-    print(tensor.shape)
+    print(np.shape(tensor))
     if sal:
         tensor = np.expand_dims(tensor, axis=0)
     else:
