@@ -28,7 +28,7 @@ def HWC_to_CHW(tensor, sal=False):
     if sal:
         tensor = np.expand_dims(tensor, axis=0)
     else:
-        tensor = tensor.transpose(2, 0, 1)
+        tensor = tensor.permute((2, 0, 1)).contiguous()
     return tensor
 
 def get_dataloader_sep_folder(data_dir: str,
