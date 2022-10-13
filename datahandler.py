@@ -28,7 +28,7 @@ def HWC_to_CHW(tensor, sal=False):
     if sal:
         tensor = np.expand_dims(tensor, axis=0)
     else:
-        tensor = np.transpose(tensor, (0, 3, 1, 2))
+        tensor = tensor.transpose(2, 0, 1)
     return tensor
 
 def get_dataloader_sep_folder(data_dir: str,
@@ -65,8 +65,8 @@ def get_dataloader_sep_folder(data_dir: str,
         Train and Test dataloaders.
     """
     tf_list = []
-    tf_list.append(HWC_to_CHW)
     tf_list.append(normalize())
+    tf_list.append(HWC_to_CHW)
     tf_list.append(torch.from_numpy)
     data_transforms = transforms.Compose(tf_list)
 
