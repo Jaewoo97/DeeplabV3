@@ -22,7 +22,7 @@ from trainer import train_model
     type=int,
     help="Specify the number of epochs you want to run the experiment for.")
 @click.option(
-    "--trainingSetType",
+    "--trainingsettype",
     default="all",
     type=str,
     help="Training set specification. (hpo, hpi, all)")
@@ -30,7 +30,7 @@ from trainer import train_model
               default=4,
               type=int,
               help="Specify the batch size for the dataloader.")
-def main(data_directory, exp_directory, epochs, batch_size, trainingSetType):
+def main(data_directory, exp_directory, epochs, batch_size, trainingsettype):
     # Create the deeplabv3 resnet101 model which is pretrained on a subset
     # of COCO train2017, on the 20 categories that are present in the Pascal VOC dataset.
     model = createDeepLabv3()
