@@ -51,7 +51,7 @@ def main(data_directory, exp_directory, epochs, batch_size, trainingsettype):
 
     # Create the dataloader
     dataloaders = datahandler.get_dataloader_single_folder(
-        data_directory, batch_size=batch_size, coating=trainingSetType)
+        data_directory, batch_size=batch_size, coating=trainingsettype)
     bestTrainModel, bestValModel = train_model(model,
                     criterion,
                     dataloaders,
