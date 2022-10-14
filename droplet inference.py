@@ -33,21 +33,8 @@ mask2d[mask2d > threshold] = 1
 mask2d[mask2d < threshold] = 0
 boolmask2d = mask2d == 1
 labeled_pred, num_droplets = measurements.label(mask2d)
-positions = measurements.find_objects(labeled_pred)
+np.where
 
 # Overlay image
-maskedImage = overlay_masks(img0gray, [boolmask2d], colors=[np.array([239, 95, 58, 255])/255.0], mask_alpha=0.5)
-sdf
-maskedImage.show()
-plt.imshow(maskedImage)
-sdf
-plt.imshow(mask2d, cmap='jet', alpha=0.5)
-sdf
-plt.savefig('C:/Users/user/PycharmProjects/DeeplabV3_droplet/ExtractedData/maskedFrames/allDroplets_frame'+str(frameIdx)+'.png')
-
-
-plt.imshow(pred2d)
-
-plt.figure()
-plt.imshow(test0)
-plt.figure()
+maskedImage = overlay_masks(img0gray, [boolmask2d], colors=[np.array([239, 95, 58, 255])/255.0], mask_alpha=0.3)
+maskedImage.save('C:/Users/user/PycharmProjects/DeeplabV3_droplet/ExtractedData/maskedFrames/allDroplets_frame'+str(frameIdx)+'.png')
